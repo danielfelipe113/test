@@ -9,9 +9,9 @@ React
 React Router
 
 It is a PWA
-It has a Lighthouse of XX
-It is Accesible
+Over 94% Lighthouse Report
+
+
 
 It is deployed on Netlify:
-
 https://test-ups.netlify.app
