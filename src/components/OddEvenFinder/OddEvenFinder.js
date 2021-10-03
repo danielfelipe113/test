@@ -80,8 +80,8 @@ const OddEvenFinder = () => {
               </button>
             </div>
           </form>
-          <div className="flex my-5">
-            <div className="w-1/2 border-r border-gray-900 px-5 py-3">
+          <div className="flex my-5 flex-wrap">
+            <div className="w-full sm:w-1/2 sm:border-r border-gray-900 px-5 py-3">
               <h3 className="font-semibold">Odd Numbers</h3>
               <div className="py-3" data-testid="oddNumbers">
                 {state.oddNumbers.map((value, index) => {
@@ -89,7 +89,7 @@ const OddEvenFinder = () => {
                 })}
               </div>
             </div>
-            <div className="w-1/2 border-l border-gray-900 px-5 py-2">
+            <div className="w-full sm:w-1/2 sm:border-l border-gray-900 px-5 py-2">
               <h3 className="font-semibold">Even Numbers</h3>
               <div className="py-3" data-testid="evenNumbers">
                 {state.evenNumbers.map((value, index) => {

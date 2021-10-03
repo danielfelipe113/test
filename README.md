@@ -1,4 +1,4 @@
-Hi UP SELLGURU,
+Hi UPSELL GURU,
 
 I hope you find this very complete.
 

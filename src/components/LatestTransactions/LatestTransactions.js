@@ -83,7 +83,7 @@ const LatestTransactions = () => {
         <div className="flex flex-col">
           <div className="">
             <div className="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
-              <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg overflow-x-auto">
                 { state.loading && 
                   <div className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-gray-800 bg-rose-600 hover:bg-rose-500 focus:border-rose-700 active:bg-rose-700 transition ease-in-out duration-150 cursor-not-allowed">
                     <svg

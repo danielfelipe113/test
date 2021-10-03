@@ -5,7 +5,7 @@ import React from 'react';
 const Header = () => (
     <div className="w-full flex flex-col h-screen content-center justify-center page-header" data-testid="Header">
         <div className="w-full sm:w-1/2 lg:w-1/3 bg-gray-50 rounded-xl m-auto">
-            <div className="bg-white rounded shadow px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="bg-white md:rounded shadow px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -13,7 +13,7 @@ const Header = () => (
                         </svg>
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                        <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title"> HI UP SELLGURU!</h3>
+                        <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title"> HI UPSELL GURU!</h3>
                         <div className="mt-2">
                             <p className="text-gray-500">
                                 This is what I did for the code challenge using React and
