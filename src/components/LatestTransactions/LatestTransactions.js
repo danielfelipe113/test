@@ -5,10 +5,13 @@ import LatestTransactionsDetailsModal from "./LatestTransactionsDetailsModal/Lat
 import { Link } from "react-router-dom";
 import axios from "axios";
 const LatestTransactions = () => {
+
   const [state, setState] = useState({
     latestTransactions: [],
     loading: false,
-    showDetails: null
+    showDetails: null,
+    amount: 3,
+    originalData: []
   });
 
   useEffect(() => {
@@ -17,7 +20,9 @@ const LatestTransactions = () => {
       setState({
         latestTransactions: [],
         loading: false,
-        showDetails: null
+        showDetails: null,
+        amount: 3,
+        originalData: []
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,15 +31,17 @@ const LatestTransactions = () => {
   function getLatestTransactionsItems() {
     setState({
       ...state,
-      loading: true
+      loading: true,
     });
-    axios.get("https://retoolapi.dev/M49uHh/transactions")
-      .then((data) => {
-        setState({
-          ...state,
-          latestTransactions: data.data,
-          loading: false
-        });
+    axios.get("https://retoolapi.dev/M49uHh/transactions").then((data) => {
+      
+      
+      setState({
+        ...state,
+        originalData: data.data.slice(),
+        latestTransactions: data.data.slice(0, state.amount),
+        loading: false,
+      });
     });
   }
 
@@ -42,15 +49,24 @@ const LatestTransactions = () => {
     e.preventDefault();
     setState({
       ...state,
-      showDetails: true
-    })
+      showDetails: true,
+    });
   }
 
   function onModalClose() {
     setState({
       ...state,
-      showDetails: false
-    })
+      showDetails: false,
+    });
+  }
+
+  function onAmountChange(e) {
+    
+    setState({
+      ...state,
+      latestTransactions: state.originalData.slice(0, Number(e.target.value)),
+      amount: Number(e.target.value)
+    });
   }
 
   return (
@@ -81,10 +97,31 @@ const LatestTransactions = () => {
 
       <div className="w-full">
         <div className="flex flex-col">
+          <div className="flex items-center justify-end px-8">
+            <div className="text-xs">Show</div>
+            <div className="px-2">
+              <div className="bg-white inset-y-0 right-0 flex items-center">
+                
+                <select
+                  id="amount"
+                  name="amount"
+                  className="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm "
+                  onChange={onAmountChange}
+                  value={state.amount}
+                  data-testid="amountInput"
+                >
+                  <option value="3">3</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+            </div>
+            <div  className="text-xs">Elements</div>
+          </div>
           <div className="">
             <div className="py-2 align-middle inline-block w-full sm:px-6 lg:px-8">
               <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg overflow-x-auto">
-                { state.loading && 
+                {state.loading && (
                   <div className="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-gray-800 bg-rose-600 hover:bg-rose-500 focus:border-rose-700 active:bg-rose-700 transition ease-in-out duration-150 cursor-not-allowed">
                     <svg
                       className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-800"
@@ -108,7 +145,7 @@ const LatestTransactions = () => {
                     </svg>
                     Loading
                   </div>
-                }
+                )}
 
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
@@ -167,7 +204,10 @@ const LatestTransactions = () => {
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <button className="text-indigo-600 hover:text-indigo-900" onClick={showDetails}>
+                            <button
+                              className="text-indigo-600 hover:text-indigo-900"
+                              onClick={showDetails}
+                            >
                               Details
                             </button>
                           </td>
@@ -182,7 +222,12 @@ const LatestTransactions = () => {
         </div>
       </div>
 
-      {state.showDetails && <LatestTransactionsDetailsModal details={state.latestTransactions[0]} onModalClose={onModalClose} />}
+      {state.showDetails && (
+        <LatestTransactionsDetailsModal
+          details={state.latestTransactions[0]}
+          onModalClose={onModalClose}
+        />
+      )}
     </div>
   );
 };

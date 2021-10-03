@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import LatestTransactions from './LatestTransactions';
 import { BrowserRouter } from 'react-router-dom';
@@ -41,6 +41,41 @@ const globalLatestTransactions = [
     "guestId": "user_616",
     "itemsCount": 5,
     "totalValue": 112
+  },
+  {
+    "id": 6,
+    "guest": "Lorelle Cathro",
+    "guestId": "user_171",
+    "itemsCount": 15,
+    "totalValue": 96
+  },
+  {
+    "id": 7,
+    "guest": "Heindrick Archer",
+    "guestId": "user_876",
+    "itemsCount": 13,
+    "totalValue": 370
+  },
+  {
+    "id": 8,
+    "guest": "Fawne Ledger",
+    "guestId": "user_401",
+    "itemsCount": 17,
+    "totalValue": 134
+  },
+  {
+    "id": 9,
+    "guest": "Way Scanterbury",
+    "guestId": "user_411",
+    "itemsCount": 7,
+    "totalValue": 80
+  },
+  {
+    "id": 10,
+    "guest": "Ryann Venneur",
+    "guestId": "user_858",
+    "itemsCount": 18,
+    "totalValue": 133
   }
 ];
 
@@ -75,7 +110,31 @@ describe('<LatestTransactions />', () => {
     );
     const latestTransactions = await screen.findAllByTestId('latestTransaction');
 
-    expect(latestTransactions.length).toBe(10);
+    expect(latestTransactions.length).toBe(3);
     
+  });
+
+  test('it should show N amount of transactions', async () => {
+    render(
+      <BrowserRouter>
+        <LatestTransactions />
+      </BrowserRouter>
+    );
+
+    const selectInput = await screen.findByTestId('amountInput');
+    fireEvent.change(selectInput, { target: { value: 3 } })
+    let latestTransactions = await screen.findAllByTestId('latestTransaction');
+
+    expect(latestTransactions.length).toBe(3);
+
+    fireEvent.change(selectInput, { target: { value: 5 } })
+    latestTransactions = await screen.findAllByTestId('latestTransaction');
+
+    expect(latestTransactions.length).toBe(5);
+
+    fireEvent.change(selectInput, { target: { value: 10 } })
+    latestTransactions = await screen.findAllByTestId('latestTransaction');
+
+    expect(latestTransactions.length).toBe(10);
   });
 });
