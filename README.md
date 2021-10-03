@@ -14,5 +14,5 @@ Over 94% Lighthouse Report
 
 
 It is deployed on Netlify:
-[https://test-ups.netlify.app](https://test-ups.netlify.app){:target="_blank"}
+[https://test-ups.netlify.app](https://test-ups.netlify.app)
 
